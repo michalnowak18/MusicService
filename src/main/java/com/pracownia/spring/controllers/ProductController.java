@@ -1,18 +1,19 @@
 package com.pracownia.spring.controllers;
 
 import com.pracownia.spring.entities.Product;
+import com.pracownia.spring.entities.Seller;
 import com.pracownia.spring.services.ProductService;
+import com.pracownia.spring.services.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.validation.Valid;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -67,11 +68,11 @@ public class ProductController {
      *
      */
     @PostMapping(value = "/product")
-    public ResponseEntity<Product> create(@RequestBody @NonNull @Validated(Product.class)
+    public ResponseEntity<Product> create(@RequestBody @NonNull @Valid
                                                       Product product) {
         product.setProductId(UUID.randomUUID().toString());
         productService.saveProduct(product);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return ResponseEntity.ok().body(product);
     }
 
 
@@ -94,9 +95,9 @@ public class ProductController {
      *
      */
     @DeleteMapping(value = "/product/{id}")
-    public RedirectView delete(@PathVariable Integer id) {
+    public ResponseEntity delete(@PathVariable Integer id) {
         productService.deleteProduct(id);
-        return new RedirectView("/api/products", true);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/products/{id}")
@@ -105,4 +106,8 @@ public class ProductController {
     }
 
 
+    @GetMapping(value = "/products/{page}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<Product> list(@PathVariable("page") Integer pageNr,@RequestParam("size") Optional<Integer> howManyOnPage) {
+        return productService.listAllProductsPaging(pageNr, howManyOnPage.orElse(2));
+    }
 }

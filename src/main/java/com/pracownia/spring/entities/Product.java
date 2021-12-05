@@ -3,8 +3,10 @@ package com.pracownia.spring.entities;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
@@ -15,8 +17,8 @@ import java.util.Set;
  * Product entity.
  */
 @Entity
-//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,
-//        property="refId", scope=Product.class)
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,
+        property="refId", scope=Product.class)
 public class Product {
 
     @Id
@@ -30,6 +32,7 @@ public class Product {
     private String name;
 
     @Column
+    @Max(value = 6)
     private BigDecimal price;
 
     @Column(length = 1000)
