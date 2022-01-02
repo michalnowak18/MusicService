@@ -35,6 +35,9 @@ public class Band {
     @OneToMany(fetch = FetchType.LAZY, mappedBy="bandOb")
     private List<Album> albumsOb;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bandOb")
+    private List<Artist> artists;
+
     //required by Hibernate
     public Band(){
 

@@ -1,0 +1,28 @@
+{
+  "properties": [
+    {
+      "name": "database.driverClassName",
+      "type": "java.lang.String",
+      "description": "Description for database.driverClassName."
+    },
+    {
+      "name": "datasource.platrform",
+      "type": "java.lang.String",
+      "description": "Description for datasource.platrform."
+    },
+    {
+      "name": "datasource.url",
+      "type": "java.lang.String",
+      "description": "Description for datasource.url."
+    },
+    {
+      "name": "datasource.username",
+      "type": "java.lang.String",
+      "description": "Description for datasource.username."
+    },
+    {
+      "name": "datasource.password",
+      "type": "java.lang.String",
+      "description": "Description for datasource.password."
+    }
+  ] }

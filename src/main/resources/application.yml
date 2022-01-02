@@ -1,14 +1,12 @@
-## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
 spring:
     jpa:
-        properties:
-            hibernate:
-                dialect: org.hibernate.dialect.HSQLDialect
-                ddl-auto: update
+        database: POSTGRESQL
         show-sql: true
-    database:
-        driverClassName: org.hsqldb.jdbcDriver
+        hibernate:
+            ddl-auto: create-drop
     datasource:
-        url: jdbc:hsqldb:mem:spring
-        username: sa
-        password:
+        platform: postgres
+        url: jdbc:postgresql://localhost:5432/postgres
+        username: postgres
+        password: postgres1532
+        driverClassName: org.postgresql.Driver
