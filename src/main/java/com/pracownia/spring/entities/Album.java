@@ -9,10 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Product entity.
@@ -35,6 +32,14 @@ public class Album {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Band bandOb = new Band();
+
+    @ElementCollection
+    @CollectionTable(name = "songs")
+    @Column(name = "song_name")
+    private List<String> songNames = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "albumOb", cascade = CascadeType.PERSIST)
+    private List<Song> songsOb;
 
     //required by Hibernate
     public Album(){
@@ -84,5 +89,17 @@ public class Album {
 
     public void setBandOb(Band bandOb) {
         this.bandOb = bandOb;
+    }
+
+    public void setSongsOb(List<Song> songsOb) {
+        this.songsOb = songsOb;
+    }
+
+    public List<String> getSongNames() {
+        return songNames;
+    }
+
+    public void setSongNames(List<String> songNames) {
+        this.songNames = songNames;
     }
 }

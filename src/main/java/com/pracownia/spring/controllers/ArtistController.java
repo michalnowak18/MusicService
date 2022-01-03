@@ -1,7 +1,6 @@
 package com.pracownia.spring.controllers;
 
 import com.pracownia.spring.entities.Artist;
-import com.pracownia.spring.entities.Artist;
 import com.pracownia.spring.services.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

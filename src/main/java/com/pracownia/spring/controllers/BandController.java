@@ -1,5 +1,6 @@
 package com.pracownia.spring.controllers;
 
+import com.pracownia.spring.entities.Album;
 import com.pracownia.spring.entities.Band;
 import com.pracownia.spring.services.BandService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,18 +66,13 @@ public class BandController {
         return BandService.getByName(name);
     }
 
-    @GetMapping(value = "/band/Albums/{id}")
+    @GetMapping(value = "/band/albums/{id}")
     public Integer getAlbumsSize(@PathVariable Integer id) {
         return BandService.getNumberOfAlbums(id);
     }
 
-    @GetMapping(value = "/band/{id}", produces = MediaType.APPLICATION_ATOM_XML_VALUE)
-    @ResponseBody
-    public ResponseEntity<Band> getBandByPublicId(@PathVariable("id") Integer publicId) {
-        Optional<Band> Band = BandService.getBandById(publicId);
-        if(Band.isPresent()) {
-            return ResponseEntity.ok(Band.get());
-        } else
-            return ResponseEntity.noContent().build();
+    @GetMapping(value = "/band/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Band getByPublicId(@PathVariable("id") Integer publicId) {
+        return BandService.getBandById(publicId).orElseGet(null);
     }
 }

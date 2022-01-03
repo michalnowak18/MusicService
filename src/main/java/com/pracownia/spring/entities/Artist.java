@@ -1,6 +1,8 @@
 package com.pracownia.spring.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Artist {
@@ -23,9 +25,10 @@ public class Artist {
 
     }
 
-    public Artist(String name, String instrument) {
+    public Artist(String name, String instrument, Band bandOb) {
         this.name = name;
         this.instrument = instrument;
+        this.bandOb = bandOb;
     }
 
     public int getId() {
